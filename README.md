@@ -1,5 +1,3 @@
-# CS411
+# Project repo for group EPOCH CS411
 
-1. game introduction page
-2. travel 
    
