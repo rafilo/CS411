@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {searchWeather} from '../API_Calls/WeatherCall'
+import {getFlights} from '../API_Calls/flightInfoCall'
 
 export default class Search extends Component {
 
@@ -36,9 +36,8 @@ export default class Search extends Component {
         
         console.log(`Form submitted:`);
         console.log(`Search Source: ${this.state.search_Source}`);
-        searchWeather(this.state.search_Source)
         console.log(`Search Destination: ${this.state.search_Destination}`);
-        searchWeather(this.state.search_Destination)
+        getFlights()
 
 
         this.setState({
