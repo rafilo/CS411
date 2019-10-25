@@ -10,9 +10,9 @@ function getWeather(searchQuery){
 	// Jquery $ targets HTMl elements with a certain class
 	$.ajax(url,{success: function(data){
 		$(".city").text(data.name);
-		$(".temp").text(data.main.temp);
+		$(".temp").text(data.main.temp + " °F");
 	}, error: function(error){
-		$(".error-message").text("An error occured");
+		$(".error-message").text("City does not exist!");
 	}})
 }
 export const searchWeather = (searchQuery)=>{

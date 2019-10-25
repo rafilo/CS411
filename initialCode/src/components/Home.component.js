@@ -8,7 +8,7 @@ export default class Home extends Component {
                 <p class = "d-flex justify-content-center">Welcome to This Amazing Project!!</p>
                 
             </div>
-            <img class="center" height={555} width={1110} src={require('../planeGif.gif')} alt="loading..." />
+            {/* <img class="center" height={555} width={1110} src={require('../planeGif.gif')} alt="loading..." /> */}
             </div>
             
         )

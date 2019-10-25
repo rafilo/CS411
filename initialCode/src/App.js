@@ -25,7 +25,7 @@ class App extends Component {
                   <Link to="/flights" className="nav-link">Flight Info</Link>
                 </li>
                 <li className="navbar-item">
-                  <Link to="/search" className="nav-link">Search</Link>
+                  <Link to="/search" className="nav-link">Weather Search</Link>
                 </li>
                 <li className="navbar-item">
                   <Link to="/about" className="nav-link">About us</Link>

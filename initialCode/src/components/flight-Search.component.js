@@ -12,9 +12,8 @@ export default class Search extends Component {
         this.onSubmit = this.onSubmit.bind(this);
 
         this.state = {
-            search_description: '',
+            search_Source: '',
             search_Destination: '',
-            // todo_priority: '',
             search_completed: false
         }
     }
@@ -37,7 +36,7 @@ export default class Search extends Component {
         console.log(`Form submitted:`);
         console.log(`Search Source: ${this.state.search_Source}`);
         console.log(`Search Destination: ${this.state.search_Destination}`);
-        getFlights()
+        // getFlights()
 
 
         this.setState({
@@ -76,10 +75,7 @@ export default class Search extends Component {
                         
                         <input type="submit" value="Search" className="btn btn-primary" />
 
-                        <p class="d-flex justify-content-center">Output:</p>
-                        <p class = "d-flex justify-content-center"><div class="error-message"></div></p>
-                        <p class = "d-flex justify-content-center"><div class="city"></div></p>
-                        <p class = "d-flex justify-content-center"><div class="temp"></div></p>
+                        <p class="d-flex justify-content-center"><b>Note: This does not actually do anything yet!</b></p>
                     </div>
                     
                 </form>
