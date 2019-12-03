@@ -34,16 +34,6 @@ export default class Home extends Component {
         return hashParams;
       }
 
-      callAPI(){
-          fetch("http://localhost:8888/callback")
-                .then(res => res.text)
-                .then(res => this.setState({loggedIn: res}))
-                .catch(err => err);
-      }
-
-      componentDidMount(){
-          this.callAPI();
-      }
       
     render (){
 

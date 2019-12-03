@@ -74,7 +74,7 @@ app.get('/callback', function(req, res) {
         code: code,
         redirect_uri: redirect_uri,
         grant_type: 'authorization_code'
-      },
+      },  
       headers: {
         'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64'))
       },
@@ -100,8 +100,7 @@ app.get('/callback', function(req, res) {
           console.log("Email: " + body.email)
           console.log("Display Name: " + body.display_name)
         });
-        // we can also pass the token to the browser to make requests from there
-        res.send("Status")
+        // res.send("????")
         res.redirect('http://localhost:3000/home' );
         // +
           // querystring.stringify({
