@@ -15,20 +15,34 @@ app.set('views','./views');
  * Function to connect to Mongoose (localhost)
  * Added by: Ethan T Go
  */
-mongoose.connect('mongodb://localhost/user')
-    .then(() => console.log('Connected to MongoDB...'))
-    .catch(err => console.error('Could not connect to MongoDB...', err))
-/**
- * The following is a schema for user, every time a user is added we add their data into mongoDB with the follwoing semantics
- */
-const userSchema = new mongoose.Schema({
-      name: String,
-      email: String,
-      tags: [ String ],
-      date: {type: Date, default: Date.now}
-  });
-//Storing into the collection
-const User = mongoose.model('User', userSchema);
+// mongoose.connect('mongodb://localhost/user')
+//     .then(() => console.log('Connected to MongoDB...'))
+//     .catch(err => console.error('Could not connect to MongoDB...', err))
+// /**
+// //  * The following is a schema for user, every time a user is added we add their data into mongoDB with the follwoing semantics
+// //  */
+// const userSchema = new mongoose.Schema({
+//       name: String,
+//       email: String,
+//       tags: [ String ],
+//       date: {type: Date, default: Date.now}
+//   });
+
+// //Storing into the collection
+// const User = mongoose.model('User', userSchema);
+
+// async function createUser(user_name, user_email){
+// const user = new User({
+//     name: user_name,
+//     email: user_email,
+//     tags: ['spotify']
+// });
+
+// const result = await user.save();
+// console.log(result);
+// }
+// //Storing into the collection
+// const User = mongoose.model('User', userSchema);
 
 app.use(cors())
    .use(cookieParser());
