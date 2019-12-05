@@ -1,13 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const request = require('request'); // "Request" library
-const mongoose = require('mongoose');
-const cors = require('cors');
 const querystring = require('querystring');
-const cookieParser = require('cookie-parser');
 const stateKey = 'spotify_auth_state';
 const client_id = '1ca6c4fa378a440881203b24132c769f'; // Your client id
-const client_secret = 'a9194f0771c34c8d885d64ae4c6b7c76'; // Your secret
 const redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 
 /**
