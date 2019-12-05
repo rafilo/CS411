@@ -1,6 +1,8 @@
 const express = require('express');
 const router = express.Router();
 
+const stateKey = 'spotify_auth_state';
+
 /**
  * Generates a random string containing numbers and letters
  * @param  {number} length The length of the string
