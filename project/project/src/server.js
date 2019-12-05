@@ -1,9 +1,9 @@
-var express = require('express'); // Express web server framework
-var request = require('request'); // "Request" library
+const express = require('express'); // Express web server framework
+const request = require('request'); // "Request" library
 const mongoose = require('mongoose');
-var cors = require('cors');
-var querystring = require('querystring');
-var cookieParser = require('cookie-parser');
+const cors = require('cors');
+const querystring = require('querystring');
+const cookieParser = require('cookie-parser');
 var access_token
 const home_page = require('./routes/home');
 const callback = require('./routes/callback');
@@ -55,7 +55,6 @@ app.use('/refresh_token', refresh_token);
 app.use('/callback', callback);
 app.use('/', home_page);
 
-var stateKey = 'spotify_auth_state';
 
 
 
