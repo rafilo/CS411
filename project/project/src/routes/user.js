@@ -3,9 +3,8 @@ const router = express.Router();
 
 
 
-
 router.get('/:id', function(req,res){
-
+  res.render('user');
 });
 
 

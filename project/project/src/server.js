@@ -5,10 +5,12 @@ const cookieParser = require('cookie-parser');
 const home_page = require('./routes/home');
 const callback = require('./routes/callback');
 const refresh_token = require('./routes/refresh_token');
+const user = require('./routes/user');
 const app = express();
 
 console.log(home_page);
-
+app.set('view engine', 'html');
+app.set('views','./views');
 /**
  * Function to connect to Mongoose (localhost)
  * Added by: Ethan T Go
@@ -34,7 +36,8 @@ app.use(cors())
 //These are the routers
 app.use('/refresh_token', refresh_token);
 app.use('/callback', callback);
-app.use('/', home_page);
+app.use('/home', home_page);
+app.use('/', user);
 
 
 
