@@ -15,7 +15,7 @@ router.get('/', function(req, res) {
 
   // your application requests refresh and access tokens
   // after checking the state parameter
-  mongoose.connect('mongodb://localhost/cs411')
+  mongoose.connect('mongodb://localhost/epo')
     .then(() => console.log('Connected to MongoDB...'))
     .catch(err => console.error('Could not connect to MongoDB...', err))
 
@@ -23,17 +23,17 @@ router.get('/', function(req, res) {
   const userSchema = new mongoose.Schema({
       name: String,
       email: String,
-      tags: [ String ],
+      topGenre: String,
       date: {type: Date, default: Date.now}
     });
 //Storing into the collection
   const User = mongoose.model('User', userSchema);
 
-  async function createUser(user_name, user_email){
+  async function createUser(user_name, user_email, genre){
   const user = new User({
       name: user_name,
       email: user_email,
-      tags: ['spotify']
+      topGenre: genre
     });
 
   const result = await user.save();
@@ -88,7 +88,6 @@ router.get('/', function(req, res) {
           console.log("Display Name: " + body.display_name)
           var user_id = body.id;
           console.log(access_token);
-          createUser(body.display_name, body.email);
           
 
         });
@@ -98,7 +97,7 @@ router.get('/', function(req, res) {
           if(res){
             // console.log(res)
             // var artists=JSON.stringify(res);
-            var genres = {}
+            let genres = {}
             const data = JSON.parse(res.body)
             const artist_info = data.items
             for(var artist in artist_info){
@@ -113,14 +112,15 @@ router.get('/', function(req, res) {
                   genres[curr_genre]=1;
                 }
               }
-              
+              const topGenre = Object.keys(genres).reduce((a, b) => genres[a] > genres[b] ? a : b);
+            console.log("Top genre is " + topGenre)
+            // console.log(artists)
+            createUser(body.display_name, body.email, topGenre);
               
             }
             // console.log(genres)
             
-            const topGenre = Object.keys(genres).reduce((a, b) => genres[a] > genres[b] ? a : b);
-            console.log("Top genre is " + topGenre)
-            // console.log(artists)
+            
 
           }
             
