@@ -19,12 +19,16 @@ router.get('/', function(req, res) {
   var state = req.query.state || null;
   var storedState = req.cookies ? req.cookies[stateKey] : null;
 
+  // }
+
   if (state === null || state !== storedState) {
+    // console.log("Error")
     res.redirect('/#' +
       querystring.stringify({
         error: 'state_mismatch'
       }));
   } else {
+    // console.log("Happy Path")
     res.clearCookie(stateKey);
     var authOptions = {
       url: 'https://accounts.spotify.com/api/token',

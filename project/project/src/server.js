@@ -28,7 +28,8 @@ const userSchema = new mongoose.Schema({
 //Storing into the collection
 const User = mongoose.model('User', userSchema);
 
-
+app.use(cors())
+   .use(cookieParser());
 
 //These are the routers
 app.use('/refresh_token', refresh_token);
@@ -38,8 +39,7 @@ app.use('/', home_page);
 
 
 
-app.use(cors())
-   .use(cookieParser());
+
 
 
 const port = process.env.PORT || 8888;
