@@ -94,6 +94,7 @@ router.get('/', function(req, res) {
         // res.send("????")
         var artist_url = "https://api.spotify.com/v1/me/top/artists"
         request.get({url:artist_url, headers:{"Authorization": "Bearer " + access_token }}, function(err, res) {
+          try{
           if(res){
             // console.log(res)
             // var artists=JSON.stringify(res);
@@ -112,19 +113,23 @@ router.get('/', function(req, res) {
                   genres[curr_genre]=1;
                 }
               }
-              const topGenre = Object.keys(genres).reduce((a, b) => genres[a] > genres[b] ? a : b);
-            console.log("Top genre is " + topGenre)
-            // console.log(artists)
-            createUser(body.display_name, body.email, topGenre);
+              
               
             }
             // console.log(genres)
+            const topGenre = Object.keys(genres).reduce((a, b) => genres[a] > genres[b] ? a : b);
+            console.log("Top genre is " + topGenre)
+            // console.log(artists)
             
             
 
           }
-            
+        }
+        catch{
+          const topGenre = "";
+        }
         })
+        createUser(body.display_name, body.email, topGenre);
 
         res.redirect('http://localhost:3000' );
         // +
