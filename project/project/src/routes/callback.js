@@ -1,3 +1,4 @@
+
 const express = require('express');
 const router = express.Router();
 const request = require('request'); // "Request" library
@@ -9,6 +10,9 @@ const stateKey = 'spotify_auth_state';
 const client_id = '1ca6c4fa378a440881203b24132c769f'; // Your client id
 const client_secret = 'a9194f0771c34c8d885d64ae4c6b7c76'; // Your secret
 const redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
+// var token = null;
+
+
 
 router.get('/', function(req, res) {
 
@@ -57,12 +61,27 @@ router.get('/', function(req, res) {
         
 
         // use the access token to access the Spotify Web API
-        request.get(options, function(error, response, body) {
-          console.log(body);
-          console.log("Email: " + body.email)
-          console.log("Display Name: " + body.display_name)
-        });
+        // request.get(options, function(error, response, body) {
+          // console.log(body);
+          // console.log("Email: " + body.email)
+          // console.log("Display Name: " + body.display_name)
+          // var user_id = body.id;
+          // console.log(access_token);
+          
+          
+
+        // });
         // res.send("????")
+        var artist_url = "https://api.spotify.com/v1/me/top/artists"
+        request.get({url:artist_url, headers:{"Authorization": "Bearer " + access_token }}, function(err, res) {
+          if(res){
+            // console.log(res)
+            var artists=JSON.stringify(body);
+            console.log(artists)
+          }
+            
+        })
+
         res.redirect('http://localhost:3000/home' );
         // +
           // querystring.stringify({
