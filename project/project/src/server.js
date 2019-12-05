@@ -4,7 +4,6 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const querystring = require('querystring');
 const cookieParser = require('cookie-parser');
-var access_token
 const home_page = require('./routes/home');
 const callback = require('./routes/callback');
 const refresh_token = require('./routes/refresh_token');
