@@ -73,13 +73,35 @@ router.get('/', function(req, res) {
         request.get({url:artist_url, headers:{"Authorization": "Bearer " + access_token }}, function(err, res) {
           if(res){
             // console.log(res)
-            var artists=JSON.stringify(body);
-            console.log(artists)
+            // var artists=JSON.stringify(res);
+            var genres = {}
+            const data = JSON.parse(res.body)
+            const artist_info = data.items
+            for(var artist in artist_info){
+              var artist_genre = artist_info[artist].genres 
+              for(var genre in artist_genre){
+                // console.log(artist_genre[genre])
+                var curr_genre = (artist_genre[genre])
+                if(curr_genre in genres){
+                  genres[curr_genre]+=1;
+                }
+                else{
+                  genres[curr_genre]=1;
+                }
+              }
+              
+              
+            }
+            // console.log(genres)
+            
+            const topGenre = Object.keys(genres).reduce((a, b) => genres[a] > genres[b] ? a : b);
+            console.log("Top genre is " + topGenre)
+            // console.log(artists)
           }
             
         })
 
-        res.redirect('http://localhost:3000/home' );
+        res.redirect('http://localhost:3000' );
         // +
           // querystring.stringify({
           // access_token: access_token,

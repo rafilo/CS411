@@ -36,8 +36,7 @@ app.use(cors())
 //These are the routers
 app.use('/refresh_token', refresh_token);
 app.use('/callback', callback);
-app.use('/home', home_page);
-app.use('/', user);
+app.use('/', home_page);
 
 
 
