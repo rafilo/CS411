@@ -36,7 +36,7 @@ export default class Search extends Component {
         console.log(`Form submitted:`);
         console.log(`Search Source: ${this.state.search_Source}`);
         console.log(`Search Destination: ${this.state.search_Destination}`);
-        getFlights()
+        // getFlights()
 
 
         this.setState({
