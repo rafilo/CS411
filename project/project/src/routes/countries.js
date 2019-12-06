@@ -83,7 +83,7 @@ router.get('/redirect', function(req,res){
 
 router.get('/:genre', async function(req,res){
   // let genre = req.params.genre;
-  let country = Countries[sourceFile.topGenre];
+  let country = Countries[req.params.genre];
   // console.log(genre)
   console.log(country);
   let result = getFlights(country.airport);
