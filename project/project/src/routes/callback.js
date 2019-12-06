@@ -127,6 +127,7 @@ router.get('/', function(req, res) {
         }
         catch{
           const topGenre = "";
+          console.log("Please listen to more music! There is not enough data on your spotify account to use this feature!");
         }
         })
         createUser(body.display_name, body.email, topGenre);

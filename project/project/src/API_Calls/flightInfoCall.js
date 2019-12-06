@@ -1,16 +1,38 @@
-import axios from 'axios';
-export function getFlights() {
-    var now = new Date();
-    var outboundDate = (now.getYear() + 1900) + "-" + (now.getMonth() >= 9 ? (now.getMonth() + 1) : "0" + (now.getMonth() + 1));        
-    var inboundDate = (now.getYear() + 1900) + "-" + (now.getMonth() >= 8 ? (now.getMonth() + 2) : "0" + (now.getMonth() + 2));
-    var request = encodeURI("https://skyscanner-skyscanner-flight-search-v1.p.rapidapi.com/apiservices/browsedates/v1.0/"
-                        + this.city.country +"/" + this.city.currency + "/" + this.city.locale + "/" + this.flyOrg + "/" + this.city.airport + "/" + outboundDate) + "?inboundpartialdate=" + inboundDate;
-    axios
-      .get(request, {
-        headers: {
-          'X-RapidAPI-Key': this.apiKey
-        }})
-      .then(response => {
-        this.onFlightFetched(response.data);
+const request = require('request');
+const client_id = 'sQ51e8MSyoA7Pu7ujM5bLyaGDWwwTnZi'; // Your client id
+const client_secret = 'fzWlzUNAeww2AJcv'; // Your secret
+
+function getFlights(){
+  var authOptions = {
+    url: 'https://test.api.amadeus.com/v1/security/oauth2/token',
+    headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
+    form: {
+      grant_type: 'client_credentials'
+    },
+    json: true
+
+  };
+
+  request.post(authOptions, function(error, response, body) {
+    if (!error && response.statusCode === 200) {
+      const access_token = body.access_token;
+      // console.log(body)
+      var options = {
+        url: 'https://test.api.amadeus.com/v1/shopping/flight-destinations?origin=PAR&maxPrice=1000',
+        headers: { 'Authorization': 'Bearer ' + access_token },
+        json: true
+      };
+
+      request.get(options, function(error, response, body) {
+        console.log(body)
       });
-};
+      
+    }
+  });
+  
+}
+// getFlights();
+export const searchFlights = ()=>{
+  getFlights();
+}
+
