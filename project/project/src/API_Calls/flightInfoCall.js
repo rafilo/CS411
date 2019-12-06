@@ -28,8 +28,8 @@ function getFlights(destination){
         // for(var i in body.data){
         //   console.log(body.data[i].price)
         // }
-        result = JSON.stringify(body.data);
-
+        result = body;
+        console.log(`Ther esult of this is ${body.data}`)
       });
       
     }
