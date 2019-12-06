@@ -28,14 +28,12 @@ function getFlights(destination){
         // for(var i in body.data){
         //   console.log(body.data[i].price)
         // }
-        result = body;
-        console.log(`Ther esult of this is ${body.data}`)
+        // console.log(body.data)
+        module.exports.result = body.data;
       });
       
     }
   });
-  console.log(result);
-  return result;
 }
 // getFlights();
 module.exports.searchFlights = (destination)=>{

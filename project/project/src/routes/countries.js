@@ -2,7 +2,7 @@ const sourceFile = require('./callback.js');
 const flightCall = require('../API_Calls/flightInfoCall.js')
 const express = require('express');
 const router = express.Router();
-console.log(sourceFile.topGenre)
+console.log("topGenre" + sourceFile.topGenre)
 
 
 const Countries = {
@@ -12,16 +12,22 @@ const Countries = {
   'k-pop': {name: "Seoul",airport: "ICN",description: "Surprised? Where would you go if not South Korea to explore your love for K-Pop. On most streets, you can see many people showing off their singing or even dancers covering their favorite songs. South Korea's style is known for being expressive and reflecting a sense of individuality. Some say Seoul is Asia’s leader in fashion, and they’re even known for their skin care. So why not head to South Korea to experience K-Pop first hand even have the chance to look like your bias. " },
   'classical': {name: "Vienna",airport: "VIE",description: "Where to go than the heralded “capital of classical music.” Vienna has produced and housed some of the great composers like Strauss, Schubert, Beethoven, and Mozart. Vienna is known for its passionate and long enduring love with art and music. You can see that by the tons of museums and opera houses on the streets. Vienna also is home to one of the world's largest and most splendid theaters, the Vienna State Opera House. The opera house has hosted many of the world's most prominent composers, conductors, soloists, and dancers. If you love classical music, this is the place to go. " }
 }
+router.get('/redirect', function(req,res){
+  let url = 'http://localhost:8888/countries/' + sourceFile.topGenre
+  console.log("top " + sourceFile.topGenre)
+  res.redirect(url);
+});
 
 
-router.get('/:genre', function(req,res){
-  let genre = req.params.genre;
-  let country = Countries[genre];
-  console.log(genre)
+router.get('/:genre', async function(req,res){
+  // let genre = req.params.genre;
+  let country = Countries[sourceFile.topGenre];
+  // console.log(genre)
   console.log(country);
   console.log(flightCall.searchFlights(country.airport))
+  let result = await flightCall.result;
   // console.log(result)
-  res.render('countries', {countryName: country.name, countryDesc: country.description});
+  res.render('countries', {countryName: country.name, countryDesc: country.description, flights: result});
 });
 
 

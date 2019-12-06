@@ -81,6 +81,7 @@ export default class Search extends Component {
                         <a href='http://localhost:8888/Countries/pop' className="btn btn-primary">Go to New York!</a>
                         <a href='http://localhost:8888/Countries/country' className="btn btn-primary">Go to Nashville!</a>
                         <a href='http://localhost:8888/Countries/classical' className="btn btn-primary">Go to Vienna!</a>
+                        <a href='http://localhost:8888/Countries/redirect' className="btn btn-primary">Search with Spotify!</a>
                         
                     </div>
                     

@@ -7,38 +7,39 @@ const client_id = '1ca6c4fa378a440881203b24132c769f'; // Your client id
 const client_secret = 'a9194f0771c34c8d885d64ae4c6b7c76'; // Your secret
 const redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 const mongoose = require('mongoose');
+var url = 'http://localhost:3000/flights'
 
 // var token = null;
+mongoose.connect('mongodb://localhost/epo')
+.then(() => console.log('Connected to MongoDB...'))
+.catch(err => console.error('Could not connect to MongoDB...', err))
 
+
+const userSchema = new mongoose.Schema({
+  name: String,
+  email: String,
+  topGenre: String,
+  date: {type: Date, default: Date.now}
+});
+//Storing into the collection
+const User = mongoose.model('User', userSchema);
+
+async function createUser(user_name, user_email, genre){
+const user = new User({
+  name: user_name,
+  email: user_email,
+  topGenre: genre
+});
+
+const result = await user.save();
+console.log(result);
+}
 
 router.get('/', function(req, res) {
 
   // your application requests refresh and access tokens
   // after checking the state parameter
-  mongoose.connect('mongodb://localhost/epo')
-    .then(() => console.log('Connected to MongoDB...'))
-    .catch(err => console.error('Could not connect to MongoDB...', err))
 
-
-  const userSchema = new mongoose.Schema({
-      name: String,
-      email: String,
-      topGenre: String,
-      date: {type: Date, default: Date.now}
-    });
-//Storing into the collection
-  const User = mongoose.model('User', userSchema);
-
-  async function createUser(user_name, user_email, genre){
-  const user = new User({
-      name: user_name,
-      email: user_email,
-      topGenre: genre
-    });
-
-  const result = await user.save();
-  console.log(result);
-  }
 
   var code = req.query.code || null;
   var state = req.query.state || null;
@@ -122,6 +123,9 @@ router.get('/', function(req, res) {
             // console.log(artists)
             createUser(body.display_name, body.email, topGenre);
             module.exports.topGenre = topGenre;
+            console.log(topGenre)
+            url = 'http://localhost:8888/countries/' + topGenre;
+            console.log(url)
             
 
           }
@@ -131,8 +135,10 @@ router.get('/', function(req, res) {
           module.exports.topGenre = topGenre;
         }
         })
-
-        res.redirect('http://localhost:3000' );
+        console.log(url)
+        res.redirect(url);
+        
+        
         // +
           // querystring.stringify({
           // access_token: access_token,
@@ -147,7 +153,6 @@ router.get('/', function(req, res) {
           }));
       }
     });
-    
   }
 });
 
