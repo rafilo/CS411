@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 // import {getFlights} from '../API_Calls/flightInfoCall'
+import plane from '../planeGif.gif'
 
 export default class Search extends Component {
 
@@ -36,6 +37,7 @@ export default class Search extends Component {
         console.log(`Form submitted:`);
         console.log(`Search Source: ${this.state.search_Source}`);
         console.log(`Search Destination: ${this.state.search_Destination}`);
+        
         // getFlights()
 
 
@@ -49,8 +51,8 @@ export default class Search extends Component {
     render() {
         return (
             <div style={{marginTop: 10}}>
-                <h3>Enter a Source and Destination:</h3>
-                <form onSubmit={this.onSubmit}>
+                <h3>Look up a destination based off of your spotify!</h3>
+                {/* <form onSubmit={this.onSubmit}>
                     <div className="form-group"> 
                         <label>Source: </label>
                         <input  type="text"
@@ -68,24 +70,28 @@ export default class Search extends Component {
                                 onChange={this.onChangeSearchDestination}
                                 />
                                 
-                    </div>
+                    </div> */}
 
 
-                    <div className="form-group">
+                    {/* <div className="form-group" action = 'http://localhost:8888/Countries/redirect'> */}
                         
-                        <input type="submit" value="Search" className="btn btn-primary" />
+                        {/* <input type="submit" value="Search" href= 'http://localhost:8888/Countries/redirect' className="btn btn-primary" /> */}
 
-                        <p class="d-flex justify-content-center"><b>Note: This does not actually do anything yet!</b></p>
+                        {/* <p class="d-flex justify-content-center"><b>Note: This does not actually do anything yet!</b></p>
                         <a href='http://localhost:8888/Countries/j-pop' className="btn btn-primary">Go to Tokyo!</a>
                         <a href='http://localhost:8888/Countries/k-pop' className="btn btn-primary">Go to Seoul!</a>
                         <a href='http://localhost:8888/Countries/pop' className="btn btn-primary">Go to New York!</a>
                         <a href='http://localhost:8888/Countries/country' className="btn btn-primary">Go to Nashville!</a>
-                        <a href='http://localhost:8888/Countries/classical' className="btn btn-primary">Go to Vienna!</a>
-                        <a href='http://localhost:8888/Countries/redirect' className="btn btn-primary">Search with Spotify!</a>
+                        <a href='http://localhost:8888/Countries/classical' className="btn btn-primary">Go to Vienna!</a> */}
                         
-                    </div>
+                        
+                    {/* </div> */}
+                    <img src={plane} alt="loading..." />
+                    <br></br>
+                    <a href='http://localhost:8888/Countries/redirect' className="btn btn-primary">Search with Spotify!</a>
                     
-                </form>
+                    
+                {/* </form> */}
                 
             </div>
             
