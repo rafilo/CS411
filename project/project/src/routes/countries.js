@@ -83,7 +83,7 @@ router.get('/redirect', function(req,res){
 
 router.get('/:genre', async function(req,res){
   // let genre = req.params.genre;
-  let country = Countries[req.params.genre];
+  let country = Countries[sourceFile.topGenre];
   // console.log(genre)
   console.log(country);
   let result = getFlights(country.airport);
@@ -91,8 +91,13 @@ router.get('/:genre', async function(req,res){
     return value
   });
   result3.then(function(resulter){
-  
-  res.render('countries', {countryName: country.name, countryDesc: country.description, result: resulter})
+    var res1 = JSON.stringify(resulter[0])
+    var res2 = JSON.stringify(resulter[1])
+    var res3 = JSON.stringify(resulter[2])
+    var res4 = JSON.stringify(resulter[3])
+    var res5 = JSON.stringify(resulter[4])
+
+  res.render('countries', {countryName: country.name, countryDesc: country.description, result1: res1, result2: res2, result3: res3, result4: res4, result5: res5})
   })
  
 });
