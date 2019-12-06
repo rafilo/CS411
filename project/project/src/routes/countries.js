@@ -29,7 +29,7 @@ function getFlights(destination){
   //     };
 
   //     request.get(options, function(error, response, body) {
-  //       // console.log(body.data)
+  //       console.log(body.data)
   //       // for(var i in body.data){
   //       //   console.log(body.data[i].price)
   //       // }
@@ -86,10 +86,10 @@ router.get('/:genre', async function(req,res){
   let country = Countries[sourceFile.topGenre];
   // console.log(genre)
   console.log(country);
-  let result = getFlights(country.destination);
-  result.then((value) => console.log(value)).catch(console.log('Iamfail'));
-  // console.log(result)
-  res.render('countries', {countryName: country.name, countryDesc: country.description, flights: result});
+  let result = getFlights(country.airport);
+  result.then((value) => result = value).catch(console.log('Iamfail'));
+  console.log(result)
+  res.render('countries', {countryName: country.name, countryDesc: country.description, result: result});
 });
 
 
