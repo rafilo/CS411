@@ -55,7 +55,7 @@ function getFlights(destination){
           // for(var i in body.data){
           //   console.log(body.data[i].price)
           // }
-          console.log(body.data);
+          // console.log(body.data);
           resolve(body.data);
         })})
         result2.then(resolve(result2));
@@ -83,13 +83,18 @@ router.get('/redirect', function(req,res){
 
 router.get('/:genre', async function(req,res){
   // let genre = req.params.genre;
-  let country = Countries[sourceFile.topGenre];
+  let country = Countries[req.params.genre];
   // console.log(genre)
   console.log(country);
   let result = getFlights(country.airport);
-  result.then((value) => result = value).catch(console.log('Iamfail'));
-  console.log(result)
-  res.render('countries', {countryName: country.name, countryDesc: country.description, result: result});
+  let result3 = result.then(function(value){
+    return value
+  });
+  result3.then(function(resulter){
+  
+  res.render('countries', {countryName: country.name, countryDesc: country.description, result: resulter})
+  })
+ 
 });
 
 
