@@ -76,6 +76,12 @@ export default class Search extends Component {
                         <input type="submit" value="Search" className="btn btn-primary" />
 
                         <p class="d-flex justify-content-center"><b>Note: This does not actually do anything yet!</b></p>
+                        <a href='http://localhost:8888/Countries/j-pop' className="btn btn-primary">Go to Tokyo!</a>
+                        <a href='http://localhost:8888/Countries/k-pop' className="btn btn-primary">Go to Seoul!</a>
+                        <a href='http://localhost:8888/Countries/pop' className="btn btn-primary">Go to New York!</a>
+                        <a href='http://localhost:8888/Countries/country' className="btn btn-primary">Go to Nashville!</a>
+                        <a href='http://localhost:8888/Countries/classical' className="btn btn-primary">Go to Vienna!</a>
+                        
                     </div>
                     
                 </form>

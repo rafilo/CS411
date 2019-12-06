@@ -120,17 +120,17 @@ router.get('/', function(req, res) {
             const topGenre = Object.keys(genres).reduce((a, b) => genres[a] > genres[b] ? a : b);
             console.log("Top genre is " + topGenre)
             // console.log(artists)
-            
+            createUser(body.display_name, body.email, topGenre);
+            module.exports.topGenre = topGenre;
             
 
           }
         }
         catch{
           const topGenre = "";
-          console.log("Please listen to more music! There is not enough data on your spotify account to use this feature!");
+          module.exports.topGenre = topGenre;
         }
         })
-        createUser(body.display_name, body.email, topGenre);
 
         res.redirect('http://localhost:3000' );
         // +

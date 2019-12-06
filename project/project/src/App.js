@@ -28,7 +28,7 @@ class App extends Component {
             </a>
             
             <Link to="/home" className="navbar-brand">EPOCH</Link>
-            <div className="collpase navbar-collapse">
+            <div className="collapse navbar-collapse">
               <ul className="navbar-nav mr-auto">
                 <li className="navbar-item">
                   <Link to="/flights" className="nav-link">Flight Info</Link>
