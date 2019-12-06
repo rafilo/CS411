@@ -12,7 +12,7 @@ function getFlights(destination){
     json: true
 
   };
-
+  let result = "";
   request.post(authOptions, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       const access_token = body.access_token;
@@ -24,15 +24,18 @@ function getFlights(destination){
       };
 
       request.get(options, function(error, response, body) {
-        console.log(body.data)
-        for(var i in body.data){
-          console.log(body.data[i].price)
-        }
+        // console.log(body.data)
+        // for(var i in body.data){
+        //   console.log(body.data[i].price)
+        // }
+        result = JSON.stringify(body.data);
+
       });
       
     }
   });
-  
+  console.log(result);
+  return result;
 }
 // getFlights();
 module.exports.searchFlights = (destination)=>{

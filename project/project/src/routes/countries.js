@@ -19,7 +19,8 @@ router.get('/:genre', function(req,res){
   let country = Countries[genre];
   console.log(genre)
   console.log(country);
-  flightCall.searchFlights(country.airport)
+  console.log(flightCall.searchFlights(country.airport))
+  // console.log(result)
   res.render('countries', {countryName: country.name, countryDesc: country.description});
 });
 
