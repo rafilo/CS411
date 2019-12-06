@@ -13,12 +13,10 @@ app.engine('pug', require('pug').__express);
 app.set('view engine', 'pug');
 //optional, by default it's already set up
 app.set('views','./views'); //put all template into a folder called views
-app.use(express.static(__dirname + '/views'));
+app.use(express.static('public'))
 
 app.use(cors())
    .use(cookieParser());
-
-app.use(express.static('views'));
 
 //These are the routers
 app.use('/refresh_token', refresh_token);
