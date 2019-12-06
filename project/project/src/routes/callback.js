@@ -9,8 +9,8 @@ const redirect_uri = 'http://localhost:8888/callback'; // Your redirect uri
 const mongoose = require('mongoose');
 var url = 'http://localhost:3000/flights'
 
-// var token = null;
-mongoose.connect('mongodb://localhost/epo')
+// var token = null
+mongoose.connect('mongodb://localhost/epotomy')
 .then(() => console.log('Connected to MongoDB...'))
 .catch(err => console.error('Could not connect to MongoDB...', err))
 

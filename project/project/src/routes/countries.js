@@ -1,9 +1,71 @@
 const sourceFile = require('./callback.js');
-const flightCall = require('../API_Calls/flightInfoCall.js')
+// const flightCall = require('../API_Calls/flightInfoCall.js')
 const express = require('express');
 const router = express.Router();
-console.log("topGenre" + sourceFile.topGenre)
+const request = require('request');
+const client_id = 'sQ51e8MSyoA7Pu7ujM5bLyaGDWwwTnZi'; // Your client id
+const client_secret = 'fzWlzUNAeww2AJcv'; // Your secret
 
+function getFlights(destination){
+  var authOptions = {
+    url: 'https://test.api.amadeus.com/v1/security/oauth2/token',
+    headers: { 'Authorization': 'Basic ' + (new Buffer(client_id + ':' + client_secret).toString('base64')) },
+    form: {
+      grant_type: 'client_credentials'
+    },
+    json: true
+
+  };
+
+  
+  //   request.post(authOptions, function(error, response, body) {
+  //   if (!error && response.statusCode === 200) {
+  //     const access_token = body.access_token;
+  //     // console.log(body)
+  //     var options = {
+  //       url: 'https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=BOS&destinationLocationCode='+ destination +'&&departureDate=2020-01-01&adults=1',
+  //       headers: { 'Authorization': 'Bearer ' + access_token },
+  //       json: true
+  //     };
+
+  //     request.get(options, function(error, response, body) {
+  //       // console.log(body.data)
+  //       // for(var i in body.data){
+  //       //   console.log(body.data[i].price)
+  //       // }
+
+  //     });
+      
+  //   }
+  // });
+  
+  const result1 =  new Promise((resolve => {
+    request.post(authOptions, function(error, response, body) {
+      if (!error && response.statusCode === 200) {
+        const access_token = body.access_token;
+        // console.log(body)
+        var options = {
+          url: 'https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=BOS&destinationLocationCode='+ destination +'&&departureDate=2020-01-01&adults=1',
+          headers: { 'Authorization': 'Bearer ' + access_token },
+          json: true
+        };
+  
+        const result2 = new Promise((resolve) => {request.get(options, function(error, response, body) {
+          // console.log(body.data)
+          // for(var i in body.data){
+          //   console.log(body.data[i].price)
+          // }
+          console.log(body.data);
+          resolve(body.data);
+        })})
+        result2.then(resolve(result2));
+       
+      }
+    });
+   }))
+   console.log(`Finally I have got the ${result1}`);
+   return result1;
+}
 
 const Countries = {
   'pop': {name: "New York", airport: "NYC",description: "New York is the world’s largest center for pop culture. The music market in the United States is more than triple the size of any other country’s. Live music ticket sales make up the largest share of the market, home to six of the 10 highest grossing venues. Madison Square Garden in New York City regularly welcomes more than 18,000 concert-goers who come to see iconic pop stars like Shawn Mendes, Taylor Swift, and many more." },
@@ -24,8 +86,8 @@ router.get('/:genre', async function(req,res){
   let country = Countries[sourceFile.topGenre];
   // console.log(genre)
   console.log(country);
-  console.log(flightCall.searchFlights(country.airport))
-  let result = await flightCall.result;
+  let result = getFlights(country.destination);
+  result.then((value) => console.log(value)).catch(console.log('Iamfail'));
   // console.log(result)
   res.render('countries', {countryName: country.name, countryDesc: country.description, flights: result});
 });

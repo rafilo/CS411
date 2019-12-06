@@ -12,7 +12,29 @@ function getFlights(destination){
     json: true
 
   };
-  let result = "";
+
+  
+  //   request.post(authOptions, function(error, response, body) {
+  //   if (!error && response.statusCode === 200) {
+  //     const access_token = body.access_token;
+  //     // console.log(body)
+  //     var options = {
+  //       url: 'https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=BOS&destinationLocationCode='+ destination +'&&departureDate=2020-01-01&adults=1',
+  //       headers: { 'Authorization': 'Bearer ' + access_token },
+  //       json: true
+  //     };
+
+  //     request.get(options, function(error, response, body) {
+  //       // console.log(body.data)
+  //       // for(var i in body.data){
+  //       //   console.log(body.data[i].price)
+  //       // }
+  //     });
+      
+  //   }
+  // });
+  
+ const result1 =  new Promise((resolve => {
   request.post(authOptions, function(error, response, body) {
     if (!error && response.statusCode === 200) {
       const access_token = body.access_token;
@@ -23,17 +45,18 @@ function getFlights(destination){
         json: true
       };
 
-      request.get(options, function(error, response, body) {
+      const result2 = new Promise((resolve) => {request.get(options, function(error, response, body) {
         // console.log(body.data)
         // for(var i in body.data){
         //   console.log(body.data[i].price)
         // }
-        // console.log(body.data)
-        module.exports.result = body.data;
-      });
+        resolve(body.data);
+      })})
+      resolve(result2);
       
     }
   });
+ }))
 }
 // getFlights();
 module.exports.searchFlights = (destination)=>{
